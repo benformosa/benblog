@@ -62,6 +62,11 @@ target/
 .ipynb_checkpoints
 
 # BenBlog specific
-article/
-article_meta/
-static/
+article/*
+!article/example.md
+article_meta/*
+!article_meta/example.yml
+static/*
+!static/favicon.ico
+
+*.swp
