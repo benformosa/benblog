@@ -1,2 +1,6 @@
 % rebase('base.tpl')
-<strong>There's nothing here yet</strong>
+<ul>
+% for a in articles:
+  <li><a href='article/{{a}}'>{{a}}</a></li>
+% end
+</ul>

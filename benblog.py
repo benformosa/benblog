@@ -20,7 +20,8 @@ def home():
 
     If specified, only show articles with all specified tags."""
     home_content = SETTINGS.copy()
-    home_content['tags'] = request.query.tags
+    #home_content['tags'] = request.query.tags
+    home_content['articles'] = map(lambda p: os.path.splitext(p)[0], os.listdir('article'))
     return template('home', home_content)
 
 @route('/<title>')
