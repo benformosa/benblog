@@ -1,6 +1,6 @@
 #!/usr/bin/python2
 from bottle import abort, route, request, run, template, static_file
-import yaml, os, misaka
+import yaml, os, misaka, datetime
 
 SETTINGS = {
         'blog_title': "Blog",
@@ -12,13 +12,24 @@ try:
 except:
     print 'settings.yml not found, using defaults.'
 
+SETTINGS['current_year'] = datetime.datetime.today().year
+
 @route('/')
 def home():
     """Display links to recent articles.
 
     If specified, only show articles with all specified tags."""
-    tags = request.query.tags
-    return template('home', tags=tags)
+    home_content = SETTINGS.copy()
+    home_content['tags'] = request.query.tags
+    return template('home', home_content)
+
+@route('/<title>')
+def special_article(title):
+    """Display an article with a simple path."""
+    if title in SETTINGS['special_articles']:
+        return article(title)
+    else:
+        abort(404, 'No such article.')
 
 @route('/article/<title>')
 def article(title):
@@ -61,4 +72,4 @@ def favicon():
     return static_file('favicon.ico', root='./static')
 
 if __name__ == '__main__':
-    run(host='localhost', port=8080, debug=True)
+    run(host='localhost', port=8080, debug=True, reloader=True)

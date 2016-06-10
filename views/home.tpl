@@ -1,11 +1,2 @@
-<html>
-    <head>
-        <title>{{blog_title}}</title>
-    </head>
-    <body>
-        <h1>{{blog_title}}</h1>
-        <p>A cool blog by {{blog_author}}</p>
-        <h1>{{article_title}}</h1>
-        {{!article_markdown}}
-    </body>
-</html>
+% rebase('base.tpl')
+<strong>There's nothing here yet</strong>

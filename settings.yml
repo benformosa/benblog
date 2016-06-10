@@ -1,4 +1,6 @@
 ---
 blog_author: Ben Formosa
 blog_title: BenBlog
+special_articles:
+    - about
 ...
