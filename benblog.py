@@ -1,6 +1,6 @@
 #!/usr/bin/python2
-from bottle import abort, route, request, run, template, static_file
-import yaml, os, misaka, datetime
+from bottle import abort, route, request, run, template, static_file, default_app
+import yaml, os, markdown, datetime
 
 SETTINGS = {
         'blog_title': "Blog",
@@ -59,7 +59,7 @@ def article(title):
         # merge the meta, SETTINGS and content together into one dict
         article_content = meta.copy()
         article_content.update(SETTINGS)
-        article_content['markdown'] = misaka.html(article_body)
+        article_content['markdown'] = markdown.markdown(article_body)
         return template('article', article_content)
 
 @route('/static/<filepath:path>')
@@ -74,3 +74,5 @@ def favicon():
 
 if __name__ == '__main__':
     run(host='localhost', port=8080, debug=True, reloader=True)
+
+app = application = default_app()
